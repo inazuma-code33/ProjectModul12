@@ -5,24 +5,27 @@
 html {
     box-sizing: border-box;
   }
-
-body {
-    background-color: $dark;
-    padding: 20px;
-  }
 /* top bar */
 
 /* top bar- end */
 
 /* sidebar */
-
+section .sid {
+    box-sizing: border-box;
+  }
+  
   *, *::before, *::after {
     box-sizing: inherit;
   }
-
+  
   $dark: #171717;
   $light: #FFFFFF;
-
+  
+  .sid {
+    background-color: $dark;
+    padding: 20px;
+  }
+  
   .hamburger {
     padding: 10px;
     display: inline-block;
