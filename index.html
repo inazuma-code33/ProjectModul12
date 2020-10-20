@@ -1,55 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul 12</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style.scss">
-</head>
-<body>
-    <!-- górnego menu (top bar), - Menu, Ikon, Title, NavBar -->
-    <section class="top top bar">
-        <div class="top bar">
-            
-    </div>
-    </section>
-    <!-- bocznego menu (sidebar), częsci strony -->
-    <section class="sid">
-        <h1 class="txt1">Just do it</h1>
-        <button class="hamburger">
-            <span class="hamburger__box">
-              <span class="hamburger__inner"></span>
-            </span>
-          </button>
-        <div class="navigation">
-            <ul class="navigation__list">
-              <li class="navigation__item"><a href="">General</a></li>
-              <li class="navigation__item"><a href="">Detalis</a></li>
-              <li class="navigation__item"><a href="">link</a></li>
-              <li class="navigation__item"><a href="">Banners</a></li>
-              <li class="navigation__item"><a href="">Personal data</a></li>
-              <li class="navigation__item"><a href="">Payout</a></li>
-              <li class="navigation__item"><a href="">Postback</a></li>
-            </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: grid;
+        grid-template-columns: 190px 1fr;
+        grid-template-rows: 60px 1fr;
+        grid-template-areas: 'sidebar upperbar' 'sidebar main';
+        min-height: 100vh;
+        color: rgb(148, 144, 144);
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
+      }
+
+      button {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        border: none;
+        border-radius: 2.5px;
+        transition: all 0.1s linear;
+      }
+
+      .sidebar-menu {
+        grid-area: sidebar;
+        background-color: rgb(29, 29, 29);
+        text-align: left;
+      }
+      .sidebar-menu-header {
+        padding: 15px;
+        font-size: 25px;
+      }
+      .sidebar-menu-header h1 {
+        display: inline-block;
+        font-family: 'Sedgwick Ave', cursive;
+        font-size: 25px;
+        color: rgb(243, 240, 240);
+      }
+      .sidebar-menu-header > i {
+        margin-left: 24px;
+        color: lightgray;
+      }
+
+      .sidebar-menu-list {
+        list-style-type: none;
+      }
+
+      .sidebar-menu-list-item {
+        padding: 11px;
+        border-left: 4px solid rgb(29, 29, 29);
+      }
+
+      .sidebar-menu-list-item:hover {
+        background-color: rgb(49, 49, 49);
+        border-left: 4px solid rgb(226, 140, 11);
+      }
+
+      .sidebar-menu-list-item > a {
+        color: rgb(243, 240, 240);
+        font-size: 14px;
+        font-weight: 300;
+        text-decoration: none;
+      }
+
+      .sidebar-menu-list-item > a > i {
+        padding: 0 10px 0 6px;
+      }
+
+      .fa-star {
+        font-weight: 300;
+      }
+
+      .sidebar-menu-manager {
+        margin-top: 30px;
+        padding: 22px;
+        border-top: 1.5px solid rgb(49, 49, 49);
+      }
+
+      .sidebar-menu-manager h3 {
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .image-container{
+        display: inline-block;
+        position: relative;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      .image-container::after {
+        content: '';
+        position: absolute;
+        top: 1px;
+        right: 3px;
+        width: 11px;
+        height: 11px;
+        background-color: limegreen;
+        border-radius: 50%;
+      }
+      .image-container img {
+        position: relative;
+        height: 100%;
+        width: 100%;
+      }
+
+      .sidebar-menu-manager span {
+        font-size: 10px;
+      }
+
+      .upper-menu {
+        grid-area: upperbar;
+        background-color: rgb(243, 240, 240);
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: 1.5px solid lightgray;
+      }
+
+      .upper-menu > div {
+        padding: 0 24px;
+        line-height: 60px;
+        border-left: 1.5px solid rgb(228, 228, 228);
+      }
+
+      .wallet span {
+        padding: 10px;
+        font-size: 19px;
+        font-weight: 500;
+      }
+
+      .bell i {
+        position: relative;
+        font-weight: 300;
+      }
+
+      .bell i::after {
+        content: '';
+        position: absolute;
+        top: -3px;
+        right: -2px;
+        width: 8px;
+        height: 8px;
+        background-color: rgb(226, 140, 11);
+        border-radius: 50%;
+      }
+
+      .user > span {
+        padding-left: 10px;
+        font-size: 14px;
+        color: rgb(110, 124, 172);
+      }
+
+      .main-container {
+        grid-area: main;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(235, 235, 235);
+      }
+
+      .main-container > div {
+        display: flex;
+        flex-direction: column;
+        margin: 16px 16px 0 16px;
+        background-color: rgb(243, 240, 240);
+        box-shadow: 0 0 10px rgb(204, 204, 204);
+      }
+
+      .stats-title,
+      .links-title {
+        padding: 17px 0 13px 17px;
+        text-align: left;
+        border-bottom: 1.5px solid lightgray;
+      }
+
+      .stats-title h2,
+      .links-title h2 {
+        font-size: 18px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+
+      .stats-calendar {
+        border-bottom: 1.5px solid lightgray;
+      }
+
+      .stats-calendar > div {
+        display: inline-block;
+        margin: 32px 5px;
+        font-size: 14px;
+        font-weight: 300;
+      }
+
+      .stats-calendar-date {
+        text-align: left;
+        line-height: 38px;
+        border: 1.5px solid lightgray;
+        border-radius: 3px;
+      }
+
+      .stats-calendar-date > span {
+        padding: 0 54px 0 20px;
+        color: black;
+      }
+
+      .stats-calendar-date > span:last-of-type {
+        border-left: 1.5px solid lightgray;
+      }
+
+      .stats-calendar-date i {
+        padding: 0 15px;
+      }
+
+      .stats-calendar-button {
+        line-height: 38px;
+        border-radius: 3px;
+        background-color: rgb(226, 140, 11);
+      }
+
+      .stats-calendar-button i {
+        padding: 0 12px;
+        text-align: center;
+        line-height: 38px;
+        font-size: 18px;
+        color: rgb(243, 240, 240);
+      }
+
+      .stats-numbers {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px 188px;
+      }
+
+      .stats-numbers > div {
+        display: flex;
+        justify-content: space-between;
+        flex-basis: 45%;
+        padding: 15px 0 5px;
+        font-size: 16px;
+        font-weight: 500;
+        border-bottom: 1.5px solid lightgray;
+      }
+
+      .stats-numbers > div > span {
+        color: black;
+        font-weight: 300;
+      }
+
+      .stats-chart {
+        padding: 50px 190px;
+      }
+
+      .stats-chart-title {
+        text-align: left;
+        font-weight: 500;
+      }
+
+      .stats-chart-options {
+        padding: 40px;
+      }
+
+      .stats-chart-options > button {
+        margin: 0 20px;
+        font-size: 16px;
+        font-weight: 300;
+        color: rgb(148, 144, 144);
+        background-color: rgb(235, 230, 230);
+      }
+
+      .stats-chart-options > button:hover {
+        color: rgb(110, 124, 172);
+        background-color: rgb(243, 240, 240);
+      }
+
+      .stats-chart-options > button > i {
+        padding: 10px;
+      }
+
+      .blue-circle {
+        color: rgb(124, 155, 180);
+      }
+
+      .orange-circle {
+        color: rgb(228, 151, 80);
+      }
+
+      .green-circle {
+        color: rgb(74, 170, 114);
+      }
+
+      .stats-chart-options > button > span {
+        padding-right: 10px;
+      }
+
+      .links-add > button {
+        margin: 22px 0;
+        padding: 8px 20px;
+        font-size: 19px;
+        color: white;
+        background-color: rgb(226, 140, 11);
+      }
+
+      .links-list {
+        padding: 0 188px;
+        list-style: none;
+      }
+
+      .links-list-link-container {
+        display: flex;
+        padding: 20px 14px;
+        width: 100%;
+        align-items: center;
+        border-top: 1.5px solid rgb(228, 228, 228);
+        transition: all 0.1s linear;
+      }
+
+      .links-list-link-container:last-of-type {
+        border-bottom: 1.5px solid rgb(228, 228, 228);
+      }
+
+      .links-list-link-container:hover {
+        background-color: rgb(235, 230, 230);
+      }
+
+      .links-list-link-container:hover .icons-container {
+        display: block;
+      }
+
+      .title-container {
+        flex-basis: 45%;
+        text-align: left;
+      }
+      .title-container > span {
+        font-weight: 500;
+      }
+
+      .link-container {
+        flex-basis: 45%;
+        text-align: left;
+      }
+
+      .link-container > a {
+        text-decoration: none;
+        color: rgb(110, 124, 172);
+      }
+
+      .icons-container {
+        flex-basis: 10%;
+        display: none;
+      }
+      .icons-container > i:first-of-type {
+        padding: 0 15px;
+        color: rgb(226, 140, 11);
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="sidebar-menu">
+      <div class="sidebar-menu-header">
+        <h1>Just do it</h1>
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="sidebar-menu-list">
+        <li class="sidebar-menu-list-item">
+          <a href="#"><i class="fas fa-star"></i><span>General</span></a>
+        </li>
+        <li class="sidebar-menu-list-item">
+          <a href="#"><i class="far fa-list-alt"></i><span>Details</span></a>
+        </li>
+        <li class="sidebar-menu-list-item">
+          <a href="#"><i class="fas fa-link"></i><span>Links</span></a>
+        </li>
+        <li class="sidebar-menu-list-item">
+          <a href="#"><i class="fas fa-columns"></i><span>Banners</span></a>
+        </li>
+        <li class="sidebar-menu-list-item">
+          <a href="#"
+            ><i class="fas fa-user-alt"></i><span>Personal data</span></a
+          >
+        </li>
+        <li class="sidebar-menu-list-item">
+          <a href="#"
+            ><i class="fas fa-file-invoice-dollar"></i><span>Payout</span></a
+          >
+        </li>
+        <li class="sidebar-menu-list-item">
+          <a href="#"><i class="fas fa-reply-all"></i><span>Postback</span></a>
+        </li>
+      </ul>
+      <div class="sidebar-menu-manager">
+        <h3>your manager</h3>
+        <div class="image-container"><img
+          src="https://www.clipartmax.com/png/small/133-1334078_goki-parulian-operational-manager-question-mark-inside-a-circle.png"
+          alt="Goki Parulian Operational Manager - Question Mark Inside A Circle @clipartmax.com" /></div>
         </div>
-        <h1>Youe Menager</h1>
-
+        <span>Mikhael E.</span>
+      </div>
     </section>
-    <!-- głównej treści. -->
-    <section class="general">
-        <div>
-
+    <section class="upper-menu">
+      <div class="wallet">
+        <i class="fas fa-wallet"></i>
+        <span>$1,500.00</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="bell">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="user">
+        <i class="fas fa-user-circle"></i>
+        <span>Johnny Depp</span>
+      </div>
+      <div class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </div>
+    </section>
+    <section class="main-container">
+      <div class="stats">
+        <div class="stats-title">
+          <h2>General statistic</h2>
         </div>
-    </section>
-    <!-- Sekcja Linków -->
-    <section class="links">
-        <div>
-
+        <div class="stats-calendar">
+          <div class="stats-calendar-date">
+            <span>16.05.2016</span><span>16.05.2016</span
+            ><i class="fas fa-calendar-day"></i>
+          </div>
+          <div class="stats-calendar-button">
+            <i class="fas fa-redo-alt"></i>
+          </div>
         </div>
+        <div class="stats-numbers">
+          <div class="stats-numbers-signups">
+            Visit Signups <span>124</span>
+          </div>
+          <div class="stats-numbers-deposit">Net deposit <span>564</span></div>
+          <div class="stats-numbers-FTD">FTD <span>445</span></div>
+          <div class="stats-numbers-turn-over">Turn over <span>432</span></div>
+        </div>
+        <div class="stats-chart">
+          <div class="stats-chart-title">Earnings chart</div>
+          <div class="stats-chart-options">
+            <button>
+              <i class="fas fa-circle blue-circle"></i><span>Signups</span>
+            </button>
+            <button>
+              <i class="fas fa-circle orange-circle"></i><span>FTD</span>
+            </button>
+            <button>
+              <i class="fas fa-circle green-circle"></i><span>Earned</span>
+            </button>
+          </div>
+          <div class="stats-chart-chart"></div>
+        </div>
+      </div>
+      <div class="links">
+        <div class="links-title">
+          <h2>Links</h2>
+        </div>
+        <div class="links-add">
+          <button>+ add new</button>
+        </div>
+        <ul class="links-list">
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Home page</span></div>
+            <div class="link-container">
+              <a href="#">http://www.homepage.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Currently offer</span></div>
+            <div class="link-container">
+              <a href="#">http://www.currently.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Blurpix</span></div>
+            <div class="link-container">
+              <a href="#">http://www.blurpix.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Your Site</span></div>
+            <div class="link-container">
+              <a href="#">http://www.yoursite.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Google</span></div>
+            <div class="link-container">
+              <a href="#">http://www.google.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Facebook</span></div>
+            <div class="link-container">
+              <a href="#">http://www.facebook.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Dashboard</span></div>
+            <div class="link-container">
+              <a href="#">http://www.dashboard.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Blurax</span></div>
+            <div class="link-container">
+              <a href="#">http://www.blurax.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Piece of Wine</span></div>
+            <div class="link-container">
+              <a href="#">http://www.pieceofwine.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+          <li class="links-list-link-container">
+            <div class="title-container"><span>Twitter</span></div>
+            <div class="link-container">
+              <a href="#">http://www.twitter.com</a>
+            </div>
+            <div class="icons-container">
+              <i class="fas fa-link"></i><i class="fas fa-trash-alt"></i>
+            </div>
+          </li>
+        </ul>
+        <div class="links-add">
+          <button>+ add new</button>
+        </div>
+      </div>
     </section>
-
-    
-    <script src="js/script.js"></script>
-</body>
+  </body>
 </html>
